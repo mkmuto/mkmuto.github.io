@@ -1,0 +1,40 @@
+ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+ small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
+ figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+     font: inherit;
+     vertical-align: baseline;
+ }
+ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ body { line-height: 1; }
+ ol, ul { list-style: none; }
+ blockquote, q { quotes: none; }
+ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+ table { border-collapse: collapse; border-spacing: 0; }
+ 
+ 
+ header { background-color: #555; padding: 1%; text-align:center; vertical-align: middle; height: 3%; padding: 0 0 10px 10px;}
+ header #headertitle { color: #000; font-size: 16px; display:inline-block; }
+ header #headertitlesub { color: #000; font-size: 8px; display:inline-block; }
+ 
+ nav { background-color: #333; color: #080; float: left; width: 10%; height: 90%; }
+ nav ul { list-style: square; padding: 0px 0px 0px 12px; font-size: 10px; }
+ nav ul li { word-wrap: break-word; }
+ nav ul li a { text-decoration: none; color: #fff; }
+ nav ul ul {display:none;}
+ nav ul ul ul {display:none;}
+
+ nav ol { counter-reset: item; font-size: 12px; padding: 0px 0px 0px 8px; }
+ nav ol li{ display: block; word-wrap: break-word; }
+ nav ol li:before { content: counters(item, ".") " "; counter-increment: item }
+ nav ol li a { text-decoration: none; color: #080; }
+ 
+ section.mainsection { float: right; width: 90%; height: 90%; }
+ iframe.mainsection { width:100%; height:100%; }
+ 
+ footer { background-color: #555; font-size:16px; text-align: center; width: 100%; height: 4%; clear:both; }
+ footer #footertitle { color: #000; font-size: 16px; display:inline-block; }
+ footer #footertitlesub { color: #000; font-size: 8px; display:inline-block; }
