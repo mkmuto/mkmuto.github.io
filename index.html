@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>mkmuto.github.io</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <base target="mainframe">
+</head>
+<body>
+    <header id="header">
+        <div id="headertitle">Memorandum</div>&nbsp;<div id="headertitlesub">& monologue</div>
+    </header>
+
+    
+    <nav id="navmenu">
+        <ul><li>Notes</li>
+            <ul>
+                <li>Design Pattern</li>
+                <ul>
+                    <li><a href="javascript:void(0)">State Pattern</a></li>
+                </ul>
+                <li>C/C++</li>
+                <ul>
+                    <li><a href="tech/c_cplusplus.html">C++ Programming Language</a></li>
+                </ul>
+                <li>Tips and Hacks</li>
+                <ul>
+                    <li><a href="tech/tips.html#FirefoxDowngrade">Firefox downgrade</a></li>
+                </ul>
+            </ul>
+        </ul>
+        <ul>
+            <li>Blogs</li>
+            <ul>
+                <li>2018</li>
+                <ul>
+                    <li><a href="blog/2018.html#02">2018/02</a></li>
+                    <li><a href="blog/2018.html#01">2018/01</a></li>
+                </ul>
+                <li>2017</li>
+                <ul>
+                    <li>2017/12</li>
+                    <li>2017/04</li>
+                </ul>
+            </ul>
+        </ul>
+        <ul>
+            <li>Formals</li>
+            <ul>
+                <li><a href="formals.html#disclaimer">Disclaimer</a></li>
+                <li><a href="formals.html#about">About</a></li>
+            </ul>
+        </ul>
+    </nav>
+
+    <section class="mainsection">
+        <iframe class="mainsection" src="formals.html" name="mainframe"></iframe>
+    </section>
+    
+    <footer id="footer">
+        <div id="footertitle">
+            Copyright &copy mkmuto 2000-2018, all rights reserved.
+        </div>
+        <div id="footertitlesub"><a href="formals.html#disclaimer">Disclaimer</a></div>
+    </footer>
+</body>
+<script>
+ window.onload = function() {
+     function iterate(current, depth) {
+         if (current.nodeType == 3) return;
+         current.classList.add("navmenu");
+         var children = current.childNodes;
+         for (var i = 0, len = children.length; i < len; i++) {
+             iterate(children[i], depth + 1);
+         }
+     }
+     iterate(document.getElementById("navmenu"), 0);
+     
+     // event handler
+     ['click', 'keydown'].forEach(function(ev) {
+         document.getElementsByTagName("body")[0].addEventListener(ev, function(e) {
+             if (handletreelist(e)==false) {
+                 console.log("unhandled event: " + e);
+             }
+         })
+     });
+
+     function handletreelist(evt) {
+         if (evt.type != "click" || evt.target.className != "navmenu") {
+             return false;
+         }
+         var el = evt.target.nextElementSibling;
+         if (el && el.localName=="ul") {
+             el.style.display = (el.style.display == "block") ? "none" : "block";
+         }
+         return true;
+     }
+ }
+ 
+ 
+</script>
+</html>
