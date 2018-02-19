@@ -17,7 +17,7 @@
          padding: 0 4 4 0;
      }
     </style>
-    <body>
+    <body onhashchange="hashchanged()">
     
     <a name="Small Tips"></a>
 
@@ -84,9 +84,13 @@ PubkeyAuthentication yes
     </article>
 
     <script>
-     var d = document.querySelectorAll("article:not(#" + window.location.search.slice(3) + ")");
-     for (var i=0; i<d.length; i++) {
-         d[i].remove();
+     function hashchanged() {
+         var d = document.querySelectorAll("article");
+         var articleId = window.location.hash.slice(1);
+         for (var i=0; i<d.length; i++) {
+             if (d[i].id == articleId) { d[i].style.display="block"; }
+             else { d[i].style.display="none"; }
+         }
      }
     </script>
 </body></html>
