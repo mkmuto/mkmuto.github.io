@@ -1,0 +1,92 @@
+<html>
+    <style>
+     body {
+         background-color:#000;
+         color:#0f0;
+         font-size: 14px;
+     }
+     pre.code {
+         border-style: solid;
+         border-width: 1px;
+         padding: 2px 2px 2px 2px;
+         margin:4 0;
+         display:inline-block;
+     }
+     div.code_filename {
+         border-bottom: 1px solid;
+         padding: 0 4 4 0;
+     }
+    </style>
+    <body>
+    
+    <a name="Small Tips"></a>
+
+    <h1>Applications</h1>
+    <a name="ssh setup"></a>
+    <article id="ssh_setup">
+    <h2>ssh setup</h2>
+    2018.02.13 [Ubuntu 16.04] - My minimal todo's after openssh-server installation. Note that below setup can cause some security implecations.<br>
+    <h3>Client side</h3>
+    Client ssh public key needs registered to the server by doing something like:<br>
+    <pre class="code">% ssh USERNAME@SSH_SERVER_IP "echo `cat ~/.ssh/PUBKEY_FILENAME` >> ~/.ssh/authorized_keys"</pre><br>
+    . Also configure ssh as below for easier log-on:<br>
+    <pre class="code"><div class="code_filename">~/.ssh/config</div>Host mysshserver
+    HostName SERVER_HOSTNAME
+    User USERNAME
+    IdentityFile ~/.ssh/SECRET_KEY_FILENAME
+    </pre><br>
+    , so ssh log-on can be done by doing:<br>
+    <pre class="code">% ssh mysshserver</pre><br>
+    . Alternatively, the key file can be specified on the commmand line:<br>
+    <pre class="code">% ssh USERNAME@SSH_SERVER_IP -i ~/.ssh/SECRECTKEY_FILENAME</pre><br>
+    <h4>Passshare</h4>
+    Private key can be protected by a passshare and if so it needs to be unlocked with every ssh logon with the key. Below command can handle it for you, although this is less secure.<br>
+    <pre class="code">% ssh-add ~/.ssh/id_rsa</pre><br>
+    
+    
+    <h3>Server side</h3>
+    Modify sshd config as below to 1) disable password authentication, 2) enable public key authentication, and optinoally, even 3) change port number for more security.<br>
+    <pre class="code"><div class="code_filename">/etc/ssh/sshd_config</div>:
+Port 22
+:
+#PasswordAuthentication yes
+:
+PubkeyAuthentication no
+:</pre>
+    <div style="display:inline-block;"><pre>->
+
+
+
+</pre></div>
+    <pre class="code"><div class="code_filename">/etc/ssh/sshd_config</div>:
+Port 8022 # or any allocatable number. Optional.
+:
+PasswordAuthentication no # note: uncommented
+:
+PubkeyAuthentication yes
+:</pre>
+    </article>
+
+    
+    <a name="firefox_downgrade"></a>
+    <article id="firefox_downgrade">
+    <h2>Firefox Downgrade</h2>
+    2018.02.02 [Ubuntu 16.04] - Firefox (automatic) update to 58 disables useful add-ons like <a href="https://addons.mozilla.org/en-US/firefox/addon/scrapbook/">Scrapbook by Gomita</a>. I've installed firefox 56 for the addon only with the following steps:
+    <ol>
+        <li>Rename current ~/.mozilla folder to something like ~/.mozilla.back</li>
+        <li>Download <a href="http://ftp.mozilla.org/pub/firefox/releases/56.0/linux-x86_64/en-US/firefox-56.0.tar.bz2">linux firefox 56</a> and extract it locally</li>
+        <li>Start terminal and cd to the extracted folder, and run this command: <pre>./firefox</pre></li>
+        <li>When firefox starts, go to Prefernces -> "Firefox Updates" and check "Never check for updates (not recommended)". This is for firefox not to update self to newer version.</li>
+        <li>Scrapbook now can be installed and used temporarily. When Scrapbook'ed is used, make sure the downloaded files are saved out of ~/.mozilla directory.</li>                
+        <li>To get back to the original env, quit the old firefox, then restore .mozilla folder.</li>                
+    </ol>
+    Note: This works on my ubuntu 16.04 note PC as 56 was originally running on the same enviroment. Depending on the system any older verions of firefox may have compatibility issues.
+    </article>
+
+    <script>
+     var d = document.querySelectorAll("article:not(#" + window.location.search.slice(3) + ")");
+     for (var i=0; i<d.length; i++) {
+         d[i].remove();
+     }
+    </script>
+</body></html>
