@@ -44,9 +44,9 @@ window.onload = function(){
                 let price_str = "";
                 let unit_str = "";
                 dataArray[i] = dataString[i].split('\t');
+                var validline=false;
                 for (let j = 0; j < dataArray[i].length; j++) {
                     let cell_str= dataArray[i][j].replace('$','').replace(',','').replaceAll('\"','');;
-                    console.log(dataArray[i][j] + " " + cell_str);
                     let re = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
                     let match;
                     if (j == 1 && (match = re.exec(cell_str)) !== null) {
@@ -54,7 +54,7 @@ window.onload = function(){
                     } else if (j == 3 && /^(-{0,1})(\d{1,}\.\d{1,})$/.test(cell_str)) {
                         if (cell_str[0] == '-') { buysell_str = "sell" };
                         unit_str = cell_str.replace("-","");
-                    } else if (j == 4 && /^\d{3,}\.\d{2,}$/.test(cell_str)) {
+                    } else if (j == 4 && /^\d{1,}\.\d{2,}$/.test(cell_str)) {
                         price_str = cell_str;
                     }
                     if (date_str != "" && unit_str != "" && price_str != "") {
@@ -62,11 +62,12 @@ window.onload = function(){
                         // \""+buysell_str+"\",
                         // "+price_str+", "+unit_str+");\n";
                         addNewRow(-1, date_str, buysell_str, price_str, unit_str);
+                        validline=true;
                         break;
-                    } else {
-                        console.log(" < " + date_str + " > < " + buysell_str + " > < " + price_str + " > < " + unit_str + " >");
                     }                    
                 }
+                if (!validline) { console.log(dataString[i]); }
+                console.log(" < " + date_str + " > < " + buysell_str + " > < " + price_str + " > < " + unit_str + " >");
             }
         }
     }
