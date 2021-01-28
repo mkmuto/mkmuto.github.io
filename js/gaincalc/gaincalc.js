@@ -45,7 +45,8 @@ window.onload = function(){
                 let unit_str = "";
                 dataArray[i] = dataString[i].split('\t');
                 for (let j = 0; j < dataArray[i].length; j++) {
-                    let cell_str= dataArray[i][j].replace('$','').replace(',','');
+                    let cell_str= dataArray[i][j].replace('$','').replace(',','').replaceAll('\"','');;
+                    console.log(dataArray[i][j] + " " + cell_str);
                     let re = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
                     let match;
                     if (j == 1 && (match = re.exec(cell_str)) !== null) {
@@ -62,7 +63,9 @@ window.onload = function(){
                         // "+price_str+", "+unit_str+");\n";
                         addNewRow(-1, date_str, buysell_str, price_str, unit_str);
                         break;
-                    }
+                    } else {
+                        console.log(" < " + date_str + " > < " + buysell_str + " > < " + price_str + " > < " + unit_str + " >");
+                    }                    
                 }
             }
         }
