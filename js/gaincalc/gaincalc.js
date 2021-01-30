@@ -43,31 +43,47 @@ window.onload = function(){
                 let buysell_str = "buy";
                 let price_str = "";
                 let unit_str = "";
+                let fee_str = "";
                 dataArray[i] = dataString[i].split('\t');
                 var validline=false;
                 for (let j = 0; j < dataArray[i].length; j++) {
                     let cell_str= dataArray[i][j].replace('$','').replace(',','').replaceAll('\"','');;
-                    let re = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
-                    let match;
-                    if (j == 1 && (match = re.exec(cell_str)) !== null) {
-                        date_str = match[1] + "-" + zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2);
+                    if (j == 1) {
+                        let reYYYYMMDDslash = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
+                        let reYYYYMMDDhyphen = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
+                        let reYYYYMMDDslashWithTime = /^(\d{4})\/(\d{1,2})\/(\d{1,2}) \d{1,2}:\d{1,2}:\d{1,2}$/;
+                        let match;
+                        if ((match = reYYYYMMDDslash.exec(cell_str)) !== null) {
+                            date_str = match[1] + "-" + zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2);
+                        } else if ((match = reYYYYMMDDhyphen.exec(cell_str)) !== null) {
+                            date_str = match[1] + "-" + zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2);
+                        } else if ((match = reYYYYMMDDslashWithTime.exec(cell_str)) !== null) {
+                            date_str = match[1] + "-" + zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2);
+                        }
+                    } else if (j == 2) {
+                        if ( /^\d{1,}$/.test(cell_str) ||
+                             /^\d{1,}\.\d{1,}$/.test(cell_str) ) {
+                            price_str = cell_str;
+                        }
                     } else if (j == 3 && /^(-{0,1})(\d{1,}\.\d{1,})$/.test(cell_str)) {
                         if (cell_str[0] == '-') { buysell_str = "sell" };
                         unit_str = cell_str.replace("-","");
-                    } else if (j == 4 && /^\d{1,}\.\d{2,}$/.test(cell_str)) {
-                        price_str = cell_str;
+                    } else if (j == 4) {
+                        if (/^\d{1,}$/.test(cell_str) ||
+                            /^\d{1,}\.\d{1,}$/.test(cell_str)) {
+                            fee_str = parseFloat(cell_str).toFixed(2);
+                        }
                     }
-                    if (date_str != "" && unit_str != "" && price_str != "") {
-                        //addnewrowStr += "addNewRow(-1, \""+date_str+"\",
-                        // \""+buysell_str+"\",
+                    if (4 <= j && date_str != "" && unit_str != "" && price_str != "" /* && fee_str != "" */) {
+                        //addnewrowStr += "addNewRow(-1, \""+date_str+"\", \""+buysell_str+"\",
                         // "+price_str+", "+unit_str+");\n";
-                        addNewRow(-1, date_str, buysell_str, price_str, unit_str);
+                        addNewRow(-1, date_str, buysell_str, price_str, unit_str, fee_str);
                         validline=true;
                         break;
                     }                    
                 }
                 if (!validline) { console.log(dataString[i]); }
-                console.log(" < " + date_str + " > < " + buysell_str + " > < " + price_str + " > < " + unit_str + " >");
+                console.log(date_str + " | " + buysell_str + " | " + price_str + " | " + unit_str + " | " + fee_str);
             }
         }
     }
@@ -93,7 +109,7 @@ window.onload = function(){
     document.getElementById("body").appendChild(table);
     var header = table.createTHead();
     var hrow = header.insertRow(0);
-    hrow.innerHTML = "<td></td><td>Date</td><td>Buy/Sell</td><td>Price</td><td>Unit</td><td>Cost</td><td>Ins</td><td>Del</td>";
+    hrow.innerHTML = "<td></td><td>Date</td><td>Buy/Sell</td><td>Price</td><td>Unit</td><td>Fee</td><td>Gain=Proceed-Const-Fee</td><td>Ins</td><td>Del</td>";
     var tbody = doce( 'tbody' );
     tbody.id = "tbody";
     table.appendChild(tbody);
@@ -154,9 +170,8 @@ function calc() {
     
     // calculate
     var res = {}; res['long'] = {}; res['short'] = {};
-    res['long'].gain = 0;  res['short'].gain = 0;
-    res['long'].fmla = ""; res['short'].fmla = "";
-    res['long'].expo = ""; res['short'].expo = "";
+    res['long'].gain  = 0.00; res['long'].fmla  = ""; res['long'].expo  = "";
+    res['short'].gain = 0.00; res['short'].fmla = ""; res['short'].expo = "";
 
     for (const sell of TCA.sells) {
         for (const buy of TCA.buys) {
@@ -165,52 +180,80 @@ function calc() {
                 sell.ds < buy.ds /* buy is newer */) {
                 continue;
             } else if (sell.unit <= buy.unit) {
-                unit = sell.unit;
                 buy.unit = (( buy.unit * MCT.MAD - sell.unit * MCT.MAD ) / MCT.MAD).toFixed(8);
-                sell.unit = 0;
+                unit = sell.unit; sell.unit = 0;
             } else /* buy.unit < sell.unit */ {
-                unit = buy.unit;
                 sell.unit = (( sell.unit * MCT.MAD - buy.unit * MCT.MAD ) / MCT.MAD).toFixed(8);
-                buy.unit = 0;
+                unit = buy.unit; buy.unit = 0;
             }
 
             // long term or short: TBF is the value below always correct (e.q. leap year)
-            var r = res['short'];
-            if (31536000000 < (sell.ds - buy.ds)) { r = res['long']; }
+            var r = (31536000000 < (sell.ds - buy.ds)) ? res['long'] : res['short'];
             if (ds_start <= sell.ds && sell.ds < ds_end) { // only calc for outstanding tax year
-                r.gain = (r.gain * MCT.MAD + (sell.price * MCT.MAD - buy.price * MCT.MAD) * unit) / MCT.MAD;
-                r.fmla = r.fmla + "(" + sell.price + "-" + buy.price + ") * " + unit + " + ";
-                r.expo += sell.date + ' ' + buy.date + ' ' + unit + ' ' + (sell.price * unit).toFixed(2) + ' ' +
-                    (buy.price * unit).toFixed(2) + ' ' + r.gain.toFixed(2) + '\n<br>';
-                addCostInfo(buy,sell,unit);
+                const {gain,fmla,expo} = calc1part(buy, sell, unit);
+                //console.log(typeof r.gain, typeof gain);
+                r.gain += gain; r.fmla += fmla; r.expo += expo;
+                addCostInfo(buy,sell,unit,gain,fmla);
             }
 
             // break to the next sell if all of the current sell is calculated
             if (sell.unit) continue; else break;
         }
         if (0 < sell.unit) {
-            var msg = "EXITING - No enough buy for this sell: " + sell.date +
-                " price:" + sell.price + " unit: " + sell.unit;
-            alert(msg);
-            return;
+            throw "Insufficient sell: " + sell.date + " price: " + sell.price + " unit: " + sell.unit;
         }
     }
 
     // show calc result
-    res['long'].fmla = res['long'].fmla.slice(0, -2);
-    res['short'].fmla = res['short'].fmla.slice(0, -2);
+    res['long'].fmla = res['long'].fmla.slice(0, -2);   // remove trailing ' + '
+    res['short'].fmla = res['short'].fmla.slice(0, -2); // remove trailing ' + '
     var fmla_long = document.getElementById("formula_long");
-    fmla_long.firstChild.nodeValue = sel_ty_val + " long  gain: " + res['long'].gain + " = " + res['long'].fmla;
+    fmla_long.firstChild.nodeValue = sel_ty_val + " long  gain: " + res['long'].gain.toFixed(2) + " = " + res['long'].fmla;
     document.getElementById("export_long").innerHTML = res['long'].expo;//.replace(/(?:\r\n|\r|\n)/g, '<br>');
     var fmla_short = document.getElementById("formula_short");
-    fmla_short.firstChild.nodeValue = sel_ty_val + " short gain: " + res['short'].gain + " = " + res['short'].fmla;
+    fmla_short.firstChild.nodeValue = sel_ty_val + " short gain: " + res['short'].gain.toFixed(2) + " = " + res['short'].fmla;
     document.getElementById("export_short").innerHTML = res['short'].expo;//.replace(/(?:\r\n|\r|\n)/g, '<br>');
+}
+
+function calc1part(buy, sell, unit) {
+    var buy_fee  = buy.fee  * (unit / buy.unit0);
+    var sell_fee = sell.fee * (unit / sell.unit0);
+    var gain_ = (sell.price - buy.price) * unit - buy_fee - sell_fee;
+    
+    var fmla_ = "(" + sell.price + " - " + buy.price + ") x " + unit;
+    fmla_ += (buy.fee == 0) ? "" : ' - ' + buy.fee +
+        ( (unit == buy.unit0) ? "" : ' x ' +  ' (' + unit + '/'  + buy.unit0  + ')' );
+    fmla_ += (sell.fee == 0) ? "" : ' - ' + sell.fee +
+        ( (unit == sell.unit0) ? "" : ' x ' +  ' (' + unit + '/'  + sell.unit0  + ')' );
+    fmla_ += ' + ';
+
+    var expo_ = convDateStr(sell.date) + ' ' + convDateStr(buy.date) + ' ' + unit + ' ' +
+        (sell.price * unit - sell_fee).toFixed(2) + ' ' +
+        (buy.price  * unit + buy_fee).toFixed(2) + ' ' +
+        ((sell.price - buy.price) * unit - sell_fee - buy_fee).toFixed(2) + '\n<br>';
+    
+    return { gain: gain_, fmla: fmla_, expo: expo_ };
+}
+
+function convDateStr(dateStr) {
+    let ret = "";
+    let match;
+    let reYYYYMMDDslash = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
+    let reYYYYMMDDhyphen = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
+    if ((match = reYYYYMMDDslash.exec(dateStr)) !== null ||
+        (match = reYYYYMMDDhyphen.exec(dateStr)) !== null) {
+        ret = zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2) + "-" + match[1];
+    } else {
+        console.error(dateStr);
+        throw 'Wrong date string format (must YYYY/MM/DD)'
+    }
+    return ret;
 }
 
 function readCSV(event) {
 }
 
-function addNewRow(index, date, buysell, price, unit) {
+function addNewRow(index, date, buysell, price, unit, fee) {
     var tbody = document.getElementById("tbody");
     var row = tbody.insertRow( index );
     
@@ -250,7 +293,7 @@ function addNewRow(index, date, buysell, price, unit) {
     input.type = "text"; input.value = "0";
     input.style.textAlign = "right";
     input.style.fontSize = 12;
-    input.size = 10;
+    input.size = 6;
     cell.appendChild(input);
     if (price != "") input.value = price;
 
@@ -260,10 +303,17 @@ function addNewRow(index, date, buysell, price, unit) {
     input.type = "text"; input.value = "0";
     input.style.textAlign = "right";
     input.style.fontSize = 12;
-    input.size = 10;
+    input.size = 6;
     cell.appendChild(input);
     if (unit != "") input.value = unit;
 
+    // Fee info
+    cell = row.insertCell(-1);
+    var text_fee = doce("div");
+    text_fee.appendChild(document.createTextNode(fee));
+    text_fee.style.textAlign="right";
+    cell.appendChild(text_fee);
+    
     // Cost info
     cell = row.insertCell(-1);
     var text_cost = doce("div");
@@ -311,7 +361,12 @@ function readTable() {
             else if (j == 1) { ymd = getYYYYMMDD(val); act.ds = (+new Date(ymd[0],ymd[1],ymd[2])); act.date = val; }
             else if (j == 2) { (val == "buy") ? ta = TCA.buys : ta = TCA.sells; }
             else if (j == 3) { act.price=val; }
-            else if (j == 4) { act.unit=val; }
+            else if (j == 4) { act.unit=act.unit0=val; }
+            else if (j == 5) {
+                act.fee = 0;
+                let textcon = tbl.rows[i].cells[j].firstChild.textContent;
+                if (0 < textcon.length ) { act.fee=parseFloat(textcon); }
+            }
         }
         ta.push(act);
     }
@@ -337,7 +392,7 @@ function clearTable() {
 function clearCostInfo() {
     var tbl = document.getElementById("table");
     for (var i = 1/*0:thead*/; i < tbl.rows.length; i++) {
-        tbl.rows[i].cells[5].firstChild.innerHTML = "";
+        tbl.rows[i].cells[6].firstChild.innerHTML = "";
     }
 }
 
@@ -350,19 +405,18 @@ function updateTableIndexes() {
     }
 }
 
-function addCostInfo(buy, sell, units) {
+function addCostInfo(buy, sell, units, gain, fmla) {
     var tbl = document.getElementById("table");
-    for (var i = 1/*0:thead*/; i < tbl.rows.length; i++) {
-        var index = tbl.rows[i].cells[0].firstChild.textContent;
-        if (index == sell.index) {
-            pl = (sell.price * MCT.MAD - buy.price * MCT.MAD) * units / MCT.MAD;
-            tbl.rows[i].cells[5].firstChild.innerHTML += ' ' +
+    for (const row of tbl.rows) {
+        if (row.cells[0].firstChild != null /*thead*/ &&
+            sell.index == row.cells[0].firstChild.textContent) {
+            row.cells[6].firstChild.innerHTML += ' ' +
                 buy.date + (isLong(buy.ds, sell.ds) ? '(L)' : '(S)') + ' ' +
-                pl.toFixed(2) + ' = (' +
-                sell.price + ' - ' + buy.price + ') x ' + units + '<br>';
-            break;
+                gain.toFixed(2) + ' = ' + fmla.slice(0, -2) + "<br>";
+            return;
         }
-    }    
+    }
+    throw 'No associated sell found';
 }
 
 function doce(elemtype) {
@@ -389,9 +443,7 @@ function save(content, filename, contentType)
     a.download = filename;
     a.click();
     */
-    //console.log(document.getElementById("export_long").textContent);
     let txt_l = document.getElementById("export_long").textContent.replaceAll(' ','\t');
-    //console.log(txt);
     let txt_s = document.getElementById("export_short").textContent.replaceAll(' ','\t');
     let txt_h = "Sold Date\tPurchase Date\tQty\tProceed\tCost\tGain/Loss\n";
     let blob = new Blob(["\nLONG\n"+txt_h+txt_l+"\n\nSHORT\n"+txt_h+txt_s],{type:"text/plan"});
