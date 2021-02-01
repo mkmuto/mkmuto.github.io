@@ -1,6 +1,5 @@
 var MCT = {};
 MCT.TITLE = "Simple Long/Short Gain Calculator";
-//MCT.MAD = 100000000;
 const CI = {
   INDEX: 0,
   DATE: 1,
@@ -32,11 +31,11 @@ window.onload = function(){
   var sel_ty = doce("select");
   sel_ty.id = "sel_ty";
   var opt_ty2020 = doce("option");
-  opt_ty2020.value="2020";//"1577836800000";
+  opt_ty2020.value="2020";
   opt_ty2020.selected="";
   opt_ty2020.innerHTML= "TY 2020";
   var opt_ty2019 = doce("option");
-  opt_ty2019.value="2019";//"1546300800000";
+  opt_ty2019.value="2019";
   opt_ty2019.innerHTML= "TY 2019";
   sel_ty.appendChild(opt_ty2020);
   sel_ty.appendChild(opt_ty2019);
@@ -45,7 +44,7 @@ window.onload = function(){
 
   // tsv file input
   var tsv_input = doce("INPUT","file");
-  document.getElementById("body").appendChild(tsv_input);
+  document.body.appendChild(tsv_input);
   tsv_input.onchange = () => {
     clearTable();
     let tsv_file = tsv_input.files[0];
@@ -57,7 +56,7 @@ window.onload = function(){
   var btn_calc = doce("button");
   btn_calc.appendChild(document.createTextNode("Calc"));
   btn_calc.onclick = calc;
-  document.getElementById("body").appendChild(btn_calc);
+  document.body.appendChild(btn_calc);
 
   var btn_save = doce("button");
   btn_save.appendChild(document.createTextNode("Save"));
@@ -71,8 +70,8 @@ window.onload = function(){
   var table = doce( "table" );
   table.setAttribute("id", "table");
   table.setAttribute("border", "1px");
-  table.style = "font-family: monospace;"
-  document.getElementById("body").appendChild(table);
+  table.style = "width:100%; font-family: monospace; border-collapse: collapse;"
+  document.body.appendChild(table);
   var header = table.createTHead();
   var hrow = header.insertRow(0);
   hrow.innerHTML = "<td></td><td>Date</td><td>Price</td><td>Unit</td><td>Fee</td><td>Gain=Proceed-Cost-Fee</td><td>Ins</td><td>Del</td>";
@@ -89,15 +88,15 @@ window.onload = function(){
   fmla_l.appendChild(document.createTextNode(""));
   fmla_l.style.fontFamily = "monospace";
   fmla_l.style.fontSize = 12;
-  document.getElementById("body").appendChild(fmla_l);
+  document.body.appendChild(fmla_l);
 
-  document.getElementById("body").appendChild(document.createElement("br"));
+  document.body.appendChild(document.createElement("br"));
   
   var expo_l = doce("div");
   expo_l.setAttribute("id", "export_long");
   expo_l.style.fontFamily = "monospace";
   expo_l.style.fontSize = 12;
-  document.getElementById("body").appendChild(expo_l);
+  document.body.appendChild(expo_l);
   
   hori_sep();
   
@@ -106,16 +105,16 @@ window.onload = function(){
   fmla_s.appendChild(document.createTextNode(""));
   fmla_s.style.fontFamily = "monospace";
   fmla_s.style.fontSize = 12;
-  document.getElementById("body").appendChild(fmla_s);
+  document.body.appendChild(fmla_s);
 
-  document.getElementById("body").appendChild(document.createElement("br"));
+  document.body.appendChild(document.createElement("br"));
   
   var expo_s = doce("div");
   expo_s.setAttribute("id", "export_short");
   expo_s.appendChild(document.createTextNode(""));
   expo_s.style.fontFamily = "monospace";
   expo_s.style.fontSize = 12;
-  document.getElementById("body").appendChild(expo_s);
+  document.body.appendChild(expo_s);
 
   hori_sep();
   
@@ -128,19 +127,17 @@ function readTSV(event) {
   const cellExaminors = [];
   cellExaminors[TSV_CI.BROKER]=function(c) { return c; }
   cellExaminors[TSV_CI.DATE]=function(c) {
-    let reYMDslash = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
-    let reYMDhyphen = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
-    let reYMDslashWithTime = /^(\d{4})\/(\d{1,2})\/(\d{1,2}) \d{1,2}:\d{1,2}:\d{1,2}$/;
     let match;
-    if ((match = reYMDslash.exec(c)) !== null ||
-        (match = reYMDhyphen.exec(c)) !== null ||
-        (match = reYMDslashWithTime.exec(c)) !== null) {
+    // valid datetime formats:
+    // YYYY/MM/DD, or YYYY-MM-DD, or YYYY/MM/DD HH:mm:ss (time ignored)
+    if ((match = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/.exec(c)) !== null ||
+        (match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(c)) !== null ||
+        (match = /^(\d{4})\/(\d{1,2})\/(\d{1,2}) \d{1,2}:\d{1,2}:\d{1,2}$/.exec(c)) !== null) {
       return match[1] + "-" + zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2);
     } else { return ""; }
   }
   cellExaminors[TSV_CI.PRICE]=function(c) {
-    if ( /^\d{1,}$/.test(c) ||
-         /^\d{1,}\.\d{1,}$/.test(c) ) {
+    if ( /^\d{1,}$/.test(c) || /^\d{1,}\.\d{1,}$/.test(c) ) {
       return c;
     } else { return ""; }
   }
@@ -167,7 +164,7 @@ function readTSV(event) {
       if (cellExaminors[cellIndex] != null) { sData[cellIndex] = cellExaminors[cellIndex](sCell); }
       if (TSV_CI.MAX <= cellIndex) { break; }
     }
-    if (isValidRow(sData)) { addNewRow(sData); } else { console.error(sOneLine); }
+    if (isValidRow(sData)) { addNewRow(sData); } else { console.warn(sOneLine); }
   }
 }
 
@@ -199,9 +196,9 @@ function calc() {
   var res = {}; res['long'] = {}; res['short'] = {};
   res['long'].gain  = 0.00; res['long'].fmla  = ""; res['long'].expo  = "";
   res['short'].gain = 0.00; res['short'].fmla = ""; res['short'].expo = "";
-  var TCA = readHTMLtable();
-  for (const sell of TCA.sells) {
-    for (const buy of TCA.buys) {
+  var {buys, sells} = readHTMLtable();
+  for (const sell of sells) {
+    for (const buy of buys) {
       var unit = 0;
       if (buy.unit == 0    /* already taken for calc */ ||
           sell.ds < buy.ds /* buy is newer */) {
@@ -307,20 +304,6 @@ function addNewRowRaw(index, broker, date, price, unit, fee, memo) {
   cell.appendChild(input);
   cell.style.backgroundColor = "#bbb";
 
-  // Buy/Sell
-  /*var select = doce( 'select' );
-    var optionBuy  = doce( 'option' );
-    optionBuy.value = "buy";
-    optionBuy.appendChild(document.createTextNode("Buy"));
-    select.appendChild( optionBuy );
-    var optionSell = doce( 'option' );
-    optionSell.value = "sell";
-    optionSell.appendChild(document.createTextNode("Sell"));
-    select.appendChild( optionSell );
-    select.style.fontSize = 12;
-    row.insertCell(-1).appendChild( select );
-    if (buysell != "") select.value = buysell;*/
-
   // Price
   cell = row.insertCell(-1);
   input = doce('input');
@@ -338,10 +321,17 @@ function addNewRowRaw(index, broker, date, price, unit, fee, memo) {
   input.style.textAlign = "right";
   input.style.fontSize = 12;
   input.size = 6;
+  input.onchange = () => {
+    if (input.value[0] == '-') {
+      //row.style.color = "#f00";
+      row.style.backgroundColor = "#ffe4e1";
+      input.style.color = "#f00";
+    }
+  }
   cell.appendChild(input);
   if (unit != "" && unit != null) {
     input.value = unit;
-    if (unit[0]=='-') { input.style.color = "#f00"; }
+    input.onchange();
   }
 
   // Fee info
@@ -387,11 +377,11 @@ function addNewRowRaw(index, broker, date, price, unit, fee, memo) {
 }
 
 function readHTMLtable() {
-  var TCA = {}; TCA.buys = []; TCA.sells = [];
+  var buys = [], sells = [];
   var tbl = document.getElementById("table");
   if (tbl == null) { throw "no table"; }
   for (const row of tbl.rows) {
-    if (row.cells[0].firstChild == null) { continue; /*thead*/ }
+    if (isTableHeadRow(row)) { continue; }
     var act = {}; var ta;
     for (const cell of row.cells) {
       var val = cell.firstChild.value;
@@ -401,30 +391,32 @@ function readHTMLtable() {
         act.broker = cell.getAttribute('broker');
         act.memo = cell.getAttribute('memo'); break;
       case CI.DATE:
-        ymd = getYMD(val); act.ds = (+new Date(ymd[0],ymd[1],ymd[2]));
+        ymd = getYMD(val);
+        act.ds = (+new Date(ymd[0],ymd[1],ymd[2]));
         act.date = val; break;
       case CI.PRICE: act.price=val; break;
       case CI.UNIT:
         act.unit=act.unit0=Math.abs(val);
-        (0<val) ? ta=TCA.buys : ta=TCA.sells;break;
+        (0<val) ? ta=buys : ta=sells;break;
       case CI.FEE:
         act.fee = 0;
-        let textcon = cell.firstChild.textContent;
-        if (0 < textcon.length ) { act.fee=parseFloat(textcon); } break;
+        if (0 < cell.firstChild.textContent.length ) {
+          act.fee=parseFloat(textcon);
+        } break;
       }
     }
     ta.push(act);
   }
   
   // sort array
-  TCA.buys.sort(function(a,b)  {
+  buys.sort(function(a,b)  {
     return ((a.ds == b.ds) ? (a.index - b.index) : (a.ds - b.ds))
   }); 
-  TCA.sells.sort(function(a,b) {
+  sells.sort(function(a,b) {
     return a.ds - b.ds
   });
 
-  return TCA;
+  return {buys,sells};
 }
 
 function clearTable() {
@@ -453,17 +445,20 @@ function updateTableIndexes() {
 }
 
 function addCostInfo(buy, sell, units, gain, fmla) {
-  var tbl = document.getElementById("table");
+  var tbl = document.getElementById("table"); var done = [false,false];
   for (const row of tbl.rows) {
     if (isTableHeadRow(row)) { continue; }
-    if (sell.index == row.cells[CI.INDEX].firstChild.textContent) {
+    if (buy.index == row.cells[CI.INDEX].firstChild.textContent) {
+      row.style.backgroundColor = "#00ffff"; done[0] = true;
+    } else if (sell.index == row.cells[CI.INDEX].firstChild.textContent) {
+      row.style.backgroundColor = "#ff00ff"; done[1] = true;
       row.cells[CI.COST].firstChild.innerHTML += ' ' +
         buy.date + (isLong(buy.ds, sell.ds) ? '(L)' : '(S)') + ' ' +
         gain.toFixed(2) + ' = ' + fmla.slice(0, -2) + "<br>";
-      return;
     }
+    if (done[0] && done[1]) { return; }
   }
-  throw 'No associated sell found';
+  throw 'No associated row(s) found';
 }
 
 function doce(elemtype) {
@@ -492,9 +487,10 @@ function getYMD(ymd) {
   }
 }
 
-function isLong(ts1,ts2) {
-  //TODO: use Date operation instead of fixed millisec below.
-  return (31536000000 < (ts2 - ts1));
+function isLong(ms1,ms2) {
+  //1 day    = 86400000 ms (60 x 60 x 24 x 1000)
+  //365 days = 31536000000 ms (86400000 ms x 365)
+  return (31536000000 < (ms2 - ms1));
 }
 
 function isTableHeadRow(row) {
