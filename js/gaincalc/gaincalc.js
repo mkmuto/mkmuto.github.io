@@ -30,6 +30,10 @@ window.onload = function(){
   // tax year selector
   var sel_ty = doce("select");
   sel_ty.id = "sel_ty";
+  var opt_ty2021 = doce("option");
+  opt_ty2021.value="2021";
+  opt_ty2021.selected="";
+  opt_ty2021.innerHTML= "TY 2021";
   var opt_ty2020 = doce("option");
   opt_ty2020.value="2020";
   opt_ty2020.selected="";
@@ -37,6 +41,7 @@ window.onload = function(){
   var opt_ty2019 = doce("option");
   opt_ty2019.value="2019";
   opt_ty2019.innerHTML= "TY 2019";
+  sel_ty.appendChild(opt_ty2021);
   sel_ty.appendChild(opt_ty2020);
   sel_ty.appendChild(opt_ty2019);
   document.body.appendChild(sel_ty);
