@@ -406,7 +406,7 @@ function readHTMLtable() {
       case CI.FEE:
         act.fee = 0;
         if (0 < cell.firstChild.textContent.length ) {
-          act.fee=parseFloat(textcon);
+          act.fee=parseFloat(cell.firstChild.textContent);
         } break;
       }
     }
