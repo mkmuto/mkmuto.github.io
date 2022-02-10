@@ -147,7 +147,7 @@ function readTSV(event) {
     } else { return ""; }
   }
   cellExaminors[TSV_CI.UNIT]=function(c) {
-    if ( /^(-{0,1})(\d{1,}\.\d{1,})$/.test(c)) {
+    if ( /^(-{0,1})(\d{1,}\.\d{1,})$/.test(c) || /^(-{0,1})(\d{1,})$/.test(c) ) {
       return c;
     } else { return ""; }
   }
