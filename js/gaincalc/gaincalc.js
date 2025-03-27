@@ -30,6 +30,22 @@ window.onload = function(){
   // tax year selector
   var sel_ty = doce("select");
   sel_ty.id = "sel_ty";
+  var opt_ty2026 = doce("option");
+  opt_ty2026.value="2026";
+  opt_ty2026.selected="";
+  opt_ty2026.innerHTML= "TY 2026";
+  var opt_ty2025 = doce("option");
+  opt_ty2025.value="2025";
+  opt_ty2025.selected="";
+  opt_ty2025.innerHTML= "TY 2025";
+  var opt_ty2024 = doce("option");
+  opt_ty2024.value="2024";
+  opt_ty2024.selected="1";
+  opt_ty2024.innerHTML= "TY 2024";
+  var opt_ty2023 = doce("option");
+  opt_ty2023.value="2023";
+  opt_ty2023.selected="";
+  opt_ty2023.innerHTML= "TY 2023";
   var opt_ty2022 = doce("option");
   opt_ty2022.value="2022";
   opt_ty2022.selected="";
@@ -45,6 +61,10 @@ window.onload = function(){
   var opt_ty2019 = doce("option");
   opt_ty2019.value="2019";
   opt_ty2019.innerHTML= "TY 2019";
+  sel_ty.appendChild(opt_ty2026);
+  sel_ty.appendChild(opt_ty2025);
+  sel_ty.appendChild(opt_ty2024);
+  sel_ty.appendChild(opt_ty2023);
   sel_ty.appendChild(opt_ty2022);
   sel_ty.appendChild(opt_ty2021);
   sel_ty.appendChild(opt_ty2020);
