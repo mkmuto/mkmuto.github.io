@@ -30,6 +30,9 @@ window.onload = function(){
   // tax year selector
   var sel_ty = doce("select");
   sel_ty.id = "sel_ty";
+
+
+/*
   var opt_ty2026 = doce("option");
   opt_ty2026.value="2026";
   opt_ty2026.selected="";
@@ -40,7 +43,7 @@ window.onload = function(){
   opt_ty2025.innerHTML= "TY 2025";
   var opt_ty2024 = doce("option");
   opt_ty2024.value="2024";
-  opt_ty2024.selected="1";
+  opt_ty2024.selected="";
   opt_ty2024.innerHTML= "TY 2024";
   var opt_ty2023 = doce("option");
   opt_ty2023.value="2023";
@@ -69,6 +72,17 @@ window.onload = function(){
   sel_ty.appendChild(opt_ty2021);
   sel_ty.appendChild(opt_ty2020);
   sel_ty.appendChild(opt_ty2019);
+*/
+  var current_year = new Date().getFullYear(); // to pre-select default year
+  for (var year = current_year-1; 2012 <= year; year--) {
+    var opt_ty = doce("option");
+    opt_ty.value = year;
+    opt_ty.innerHTML = "TY " + year;
+    opt_ty.selected = (year == current_year-1);
+    sel_ty.appendChild(opt_ty);
+  }
+
+  
   document.body.appendChild(sel_ty);
 
 
@@ -161,7 +175,7 @@ function readTSV(event) {
     // valid datetime formats:
     // YYYY/MM/DD, or YYYY-MM-DD, or YYYY/MM/DD HH:mm:ss (time ignored)
     if ((match = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/.exec(c)) !== null ||
-        (match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(c)) !== null ||
+        (match = /^(\d{4})-(\d{1,2})-(\d{1,2}).*$/.exec(c)) !== null ||
         (match = /^(\d{4})\/(\d{1,2})\/(\d{1,2}) \d{1,2}:\d{1,2}:\d{1,2}$/.exec(c)) !== null) {
       return match[1] + "-" + zeroPadStr(match[2],2) + "-" + zeroPadStr(match[3],2);
     } else { return ""; }
