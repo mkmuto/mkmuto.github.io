@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head><meta charset="UTF-8">麻雀規則（アラモアナ東南版）最終変更日 2025年07月15日</head>
+  <head><meta charset="UTF-8">麻雀規則（アラモアナ東南版）最終変更日 2025年08月21日</head>
   <style>
+    .centerspan {
+        text-align: center;
+    }
     .tategaki {
         text-align: center;
         writing-mode: vertical-rl;
@@ -38,7 +41,7 @@
       <li>基本的には、誤行為の修正が出来る場合は、やり直してそのまま続行（例：間違った場所から自摸ったがすぐに他家が指摘、自摸り忘れて打牌したが他家がすぐに指摘、等）</li>
       <li>修正や続行が難しい場合は、錯和(チョンボ)でノーゲームとし、その局をやり直す。流局にはならない。
         <ul>
-          <li>チョンボ者は、満貫払い（子なら2000、4000、親なら4000オール払い）。</li>
+          <li>チョンボ者は、満貫払い（子なら2000、4000、親なら4000オール払い）。ノーテンリーチは流局時に錯和となる。</li>
           <li>不正な和了を宣言して手牌を公開した場合、多牌の場合、チョンボとする。</li>
           <li>少牌、空行為（空ポン、チー、カンを含む）、その他錯行為は和了放棄とする。和了放棄者は流局時にノーテン扱いとなる。</li>
         </ul>
@@ -171,7 +174,7 @@
           <td class="tategaki" rowspan="12">役満（四倍満）</td><td colspan="2"><ruby>四暗刻<rt>スーアンコー</rt></ruby></td><td class="tdc">〇</td><td></td>
         </tr>
         <tr><td colspan="2"><ruby>大三元<rt>ダイサンゲン</rt></ruby></td><td></td><td></td></tr>
-        <tr><td><ruby>国士無双<rt>コクシムソウ</rt></ruby></td><td>コクシ</td><td></td><td></td><td>暗槓の搶槓は無し</td></tr>
+        <tr><td><ruby>国士無双<rt>コクシムソウ</rt></ruby></td><td>コクシ</td><td></td><td></td><td>暗槓の槍槓は無し</td></tr>
         <tr><td colspan="2"><ruby>緑一色<rt>リューイーソー</rt></ruby></td><td></td><td></td><td>発が無くても可能</td></tr>
         <tr><td colspan="2"><ruby>字一色<rt>ツーイーソー</rt></ruby></td><td></td><td></td><td rowspan="7"></td></tr>
         <tr><td><ruby>清老頭<rt>チンロウトウ</rt></ruby></td><td>チンロウ</td><td></td><td></td></tr>
@@ -264,13 +267,134 @@
 
 
     <h2>参照</h2>
-    上記のルールは以下を参照しました。相違点についてはその都度、聞いてください。
+    上記のルールは以下を参照しました。
     <ul>
       <li>日本プロ麻雀連盟 <a href="https://www.nihon-majan.org/ritimajyanruru.html">規定</a>と、<a href="https://www.nihon-majan.org/funokeisan.html">符計算の詳細</a></li>
       <li>最高位戦日本プロ麻雀協会 <a href="https://saikouisen.com/about/rules/">ルール概要<a>と、<a href="https://saikouisen.com/pdf/230126regulations">より詳細な規定</a></li>
       <li>日本プロ麻雀協会 <a href="https://npm2001.com/old/pdf/npm_kitei.pdf">規定</a></li>
       <li>Mリーグ <a href="https://m-league.jp/about/">公式ルール</a></li>
     </ul>
+    各団体との比較を以下に纏めました。もし相違点について疑問がありましたら、その都度聞いてください。
+    <table border="1" cellpadding="2" cellspacing="0" width="100%" style='font-family:"Courier New", Courier, monospace; font-size:125%'>
+      <tbody>
+        <tr><th>↓ 規則</th><th class="tategaki">アラモアナ</th><th>Mﾘｰｸﾞ</th><th class="tategaki">最強戦</th><th class="tategaki">最高位戦</th><th class="tategaki">協会</th><th class="tategaki">RMU</th><th class="tategaki">麻将連合</th><th class="tategaki">連盟</th>
+        <tr>
+          <td></td><td></td><td colspan="8" class="centerspan">空欄はアラモアナと同じ、かっこ内はその脚注。<br>背景色黄色はアラモアナ版と違う規則。</td>
+        </tr>
+        <tr>
+          <td>箱割れ終了(トビ)</td><td class="centerspan">あり</td><td colspan="7" class="centerspan" bgcolor="yellow">なし</td>
+        </tr>
+        <tr>
+          <td>30符4翻</td><td class="centerspan">満貫</td><td colspan="5" class="centerspan"></td><td colspan="2" class="centerspan" bgcolor="yellow">7700点</td>
+        </tr>
+        <tr>
+          <td>連風牌の雀頭</td><td class="centerspan">2符</td><td colspan="6" class="centerspan"></td><td class="centerspan" bgcolor="yellow">4符</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>喰い替え</td><td class="centerspan">不可</td><td class="centerspan" colspan="5">(Mリーグの規定に無いが<br>放送では不可と言及)</td><td class="centerspan" bgcolor="yellow">可</td><td class="centerspan" bgcolor="yellow">同一牌のみ不可</td>
+        </tr>
+        <tr>
+          <td>ダブロン</td><td class="centerspan">なし</td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>三家和</td><td class="centerspan">頭ハネ</td><td colspan="6" class="centerspan"></td><td class="centerspan" bgcolor="yellow">流局</td>
+        </tr>
+        <tr>
+          <td>一発</td><td class="centerspan">あり</td><td colspan="5" class="centerspan"></td><td colspan="2" bgcolor="yellow" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>裏ドラ</td><td class="centerspan">あり</td><td colspan="5" class="centerspan"></td><td colspan="2" bgcolor="yellow" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>槓ドラ,槓裏</td><td class="centerspan">あり</td><td colspan="5" class="centerspan">(明カン時もチャンカンされなかった時点で即乗り)</td><td colspan="2" bgcolor="yellow" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>赤ドラ</td><td class="centerspan">あり</td><td class="centerspan"></td><td colspan="7" class="centerspan" bgcolor="yellow">なし</td>
+        </tr>
+        <tr>
+          <td>ツモ番なしのリーチ</td><td class="centerspan">可</td><td colspan="5" class="centerspan"></td><td class="centerspan" bgcolor="yellow">不明</td><td class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>嶺上開花と海底ツモの重複</td><td class="centerspan">なし</td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>途中流局<br>(九種九牌、四風連打、四家立直、四開槓、三家和)</td><td class="centerspan">なし</td><td colspan="6" class="centerspan">(4人リーチは続行<br>5回目のカンはできない)</td><td class="centerspan" bgcolor="yellow">あり</td>
+        </tr>
+        <tr>
+          <td>オーラスの和了/聴牌止め</td><td class="centerspan">なし</td><td colspan="7" class="centerspan"></td> 
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>流し満貫</td><td class="centerspan">なし</td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>人和</td><td class="centerspan">なし</td><td colspan="6" class="centerspan"></td><td class="centerspan" bgcolor="yellow">満貫</td>
+        </tr>
+        <tr>
+          <td>純粋役満の複合</td><td class="centerspan">あり</td><td colspan="2" class="centerspan"></td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="2" class="centerspan"></td><td colspan="2" class="centerspan" bgcolor="yellow">なし</td>
+        </tr><br>(四暗刻単騎、国士13面等特殊ダブルは除く)
+          <td>特殊なダブル役満<br>(四暗刻単騎、国士13面等)</td><td class="centerspan">なし</td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>緑發無しの緑一色</td><td class="centerspan">可</td><td colspan="4" class="centerspan"></td><td class="centerspan" bgcolor="yellow">不明</td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow">不可</td>
+        </tr>
+        <tr>
+          <td>国士無双の暗槓-槍槓和了り</td><td class="centerspan">不可</td><td colspan="3" class="centerspan"></td><td class="centerspan" bgcolor="yellow">不明</td><td colspan="2" class="centerspan"></td><td class="centerspan">可</td>
+        </tr>
+        <tr>
+          <td>萬子以外の九連宝燈</td><td class="centerspan">可</td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>数え役満</td><td class="centerspan">なし</td><td colspan="7" class="centerspan">(11翻以上は3倍満)</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>役満のパオ (大三元,大四喜,四槓子)</td><td class="centerspan">なし</td><td colspan="2" class="centerspan" bgcolor="yellow">あり(ツモは責任払い<br>ロンは折半払い)</td><td colspan="3" class="centerspan"></td><td class="centerspan" bgcolor="yellow">あり(ツモは責任払い<br>ロンは折半払い)</td><td class="centerspan" bgcolor="yellow">あり(ツモは責任払い<br>ロンは折半払い。<br>積み場は放銃者の負担<br>但しダブル役満の時は積み場はツモアガリは全員から<br>ロンアガリは責任払い)</td>
+        </tr>
+        <tr>
+          <td>大明槓の嶺上ツモのパオ</td><td class="centerspan">なし</td><td colspan="6" class="centerspan">(普通に自摸和了)</td><td class="centerspan" bgcolor="yellow">あり</td>
+        </tr>
+        <tr>
+          <td></td><td colspan="8" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>チョンボの罰則</td><td class="centerspan">満貫払い</td><td class="centerspan" bgcolor="yellow">-20</td><td class="centerspan" bgcolor="yellow">12000点供託</td><td colspan="2" class="centerspan" bgcolor="yellow">-40</td><td colspan="3" class="centerspan" bgcolor="yellow">-20</td>
+        </tr>
+        <tr>
+          <td>空チー・空ポン・空カンの罰則</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">取消1000点供託</td><td colspan="4" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+        </tr>
+        <tr>
+          <td>誤ツモ・誤ロンの罰則</td><td class="centerspan">可能なら修正*</td><td colspan="2" class="centerspan" bgcolor="yellow">発声のみはアガリ放棄</td><td colspan="4" class="centerspan" bgcolor="yellow">発声のみはアガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+        </tr>
+        <tr>
+          <td>喰い替えの罰則</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">規定無し</td><td colspan="3" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">規定無し</td><td class="centerspan" bgcolor="yellow">同一牌の場合規定無し</td>
+        </tr>
+          <td>ノーテンリーチの罰則</td><td class="centerspan">流局時錯和</td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>少牌、多牌の罰則</td><td class="centerspan">少牌:アガリ放棄<br>多牌:錯和</td><td colspan="6" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+        </tr>
+        <tr>
+          <td>見せ牌</td><td class="centerspan">可能なら修正</td><td class="centerspan" colspan="2" bgcolor="yellow">裁定</td><td colspan="2" class="centerspan" bgcolor="yellow">規定無し</td><td class="centerspan" bgcolor="yellow">裁定</td><td class="centerspan" bgcolor="yellow" colspan="2">規定無し</td>
+        </tr>
+
+        <tr>
+          <td></td><td colspan="9" class="centerspan"></td>
+        </tr>
+        
+      </tbody>
+    </table>
+
 
     <h2>索引</h2>
 <dl>
@@ -292,5 +416,135 @@
       <li>2025/08/20: タイトルを「東南版」に変更。チャンカンの漢字を修正。</li>
     </ul>
     </h2>
+
+
+    <table border="1" cellpadding="2" cellspacing="0" width="100%" style='font-family:"Courier New", Courier, monospace; font-size:125%'>
+      <tbody>
+        <tr><th>↓ 規則</th><th>アラモアナ</th><th>連盟</th><th>最高位戦</th><th>協会</th><th>RMU</th><th>麻将連合</th><th>Mリーグ</th><th>最強戦</th></tr>
+        <tr>
+          <td>箱割れ終了<br>(トビ)</td><td class="centerspan">あり</td><td colspan="7" class="centerspan" bgcolor="yellow">なし</td>
+        </tr>
+        <tr>
+          <td>30符4翻</td><td class="centerspan">満貫</td><td class="centerspan" bgcolor="yellow">7700点</td><td colspan="3" class="centerspan">満貫</td><td class="centerspan" bgcolor="yellow">7700点</td><td colspan="2" class="centerspan">満貫</td>
+        </tr>
+        <tr>
+          <td>連風牌<br>の雀頭</td><td class="centerspan">2符</td><td class="centerspan" bgcolor="yellow">4符</td><td colspan="7" class="centerspan">2符</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>喰い替え</td><td class="centerspan">不可</td><td class="centerspan" bgcolor="yellow">同一牌のみ不可</td><td colspan="3" class="centerspan">不可</td><td class="centerspan" bgcolor="yellow">可</td><td class="centerspan" bgcolor="yellow">不明</td><td class="centerspan">不可</td>
+        </tr>
+        <tr>
+          <td>ダブロン</td><td class="centerspan">なし</td><td colspan="7" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>三家和</td><td class="centerspan">なし</td><td class="centerspan" bgcolor="yellow">流局</td><td colspan="6" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>一発</td><td class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="3" class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="2" class="centerspan">あり</td>
+        </tr>
+        <tr>
+          <td>裏ドラ</td><td class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="3" class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="2" class="centerspan">あり</td>
+        </tr>
+        <tr>
+          <td>槓ドラ,槓裏</td><td class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="3" class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td><td colspan="2" class="centerspan">あり</td>
+        </tr>
+        <tr>
+          <td>赤ドラ</td><td class="centerspan">あり</td><td colspan="5" class="centerspan" bgcolor="yellow">なし</td><td class="centerspan">あり</td><td class="centerspan" bgcolor="yellow">なし</td>
+        </tr>
+        <tr>
+          <td>ツモ番なし<br>のリーチ</td><td class="centerspan">可</td><td colspan="4" class="centerspan">可</td><td class="centerspan" bgcolor="yellow">不明</td><td colspan="2" class="centerspan">可</td>
+        </tr>OB
+        <tr>
+          <td>嶺上開花と<br>海底ツモの重複</td><td class="centerspan">なし</td><td colspan="7" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>途中流局</td><td class="centerspan">なし *</td><td class="centerspan" bgcolor="yellow">あり *3</td><td colspan="7" class="centerspan">なし *4</td>
+        </tr>
+        <tr>
+          <td>オーラスの和了<br>、聴牌止め</td><td class="centerspan">なし</td><td colspan="7" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>流し満貫</td><td class="centerspan">なし</td><td colspan="7" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>人和</td><td class="centerspan">なし</td><td class="centerspan" bgcolor="yellow">満貫</td><td colspan="7" class="centerspan">なし</td>
+        </tr>
+        <tr>
+          <td>ダブル役満</td><td class="centerspan">あり</td><td colspan="2" class="centerspan" bgcolor="yellow">なし</td><td colspan="2" class="centerspan">あり*</td><td bgcolor="yellow" class="centerspan">なし</td><td colspan="2" class="centerspan">あり*</td>
+        </tr>
+        <tr>
+          <td>緑發無しの<br>緑一色</td><td class="centerspan">可</td><td class="centerspan" bgcolor="yellow">不可</td><td colspan="7" class="centerspan">可</td>
+        </tr>
+        <tr>
+          <td>国士無双の<br>暗槓-槍槓和了り</td><td class="centerspan">不可</td><td class="centerspan" bgcolor="yellow">可</td><td colspan="7" class="centerspan">不可</td>
+        </tr>
+        <tr>
+          <td>萬子以外の<br>九連宝燈</td><td class="centerspan">可</td><td colspan="8" class="centerspan">可</td>
+        </tr>
+        <tr>
+          <td>数え役満</td><td class="centerspan">なし*</td><td colspan="8" class="centerspan">なし*</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>役満のパオ<br>(大三元,大四喜,四槓子)</td><td class="centerspan">なし</td><td class="centerspan" bgcolor="yellow">あり*7</td><td colspan="3" class="centerspan">なし</td><td class="centerspan" bgcolor="yellow">あり*8</td><td colspan="2" class="centerspan" bgcolor="yellow">あり*9</td>
+        </tr>
+        <tr>
+          <td>大明槓の嶺上ツモのパオ</td><td class="centerspan">なし*10</td><td class="centerspan" bgcolor="yellow">あり</td><td colspan="7" class="centerspan">なし*10</td>
+        </tr>
+        <tr>
+          <td></td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>チョンボの罰則</td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        <tr>
+          <td>空チー・空ポン・空カン</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">錯和</td><td colspan="5" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">取消1000点供託</td>
+        </tr>
+        <tr>
+          <td>誤ツモ・誤ロン</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">錯和</td><td colspan="6" class="centerspan">発声のみはアガリ放棄</td>
+        </tr>
+        <tr>
+          <td>喰い替え</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">同一牌の場合規定無し</td><td colspan="5" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">可能</td>
+        </tr>
+          <td>ノーテンリーチ</td><td class="centerspan">流局時錯和</td><td colspan="7" class="centerspan">流局時錯和</td>
+        </tr>
+        <tr>
+          <td>少牌、多牌</td><td class="centerspan">少牌:アガリ放棄<br>多牌:錯和</td><td class="centerspan" bgcolor="yellow">錯和</td><td colspan="7" class="centerspan">アガリ放棄</td>
+        </tr>
+        <tr>
+          <td>見せ牌</td><td class="centerspan">可能なら修正</td></td><td colspan="3" class="centerspan">規定無し</td>
+        </tr>
+
+
+
+
+        <tr>
+          <td></td><td class="centerspan"></td><td class="centerspan" bgcolor="yellow"></td><td colspan="7" class="centerspan"></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    脚注1：明カン時もチャンカンされなかった時点で即乗り
+    *3： 九種九牌、四風連打、四家立直、四開槓、三家和
+    *4： 4人リーチは続行。5回目のカンはできない
+    *: 11翻以上は三倍満
+    *7: ツモは責任払い、ロンは折半払い。積み場は放銃者の負担、但しダブル役満の時は積み場はツモアガリは全員から、ロンアガリは責任払い
+    *8:  大三元と大四喜のみ（ツモは責任払い、ロンは折半払い）
+    *9:  ツモは責任払い、ロンは折半払い<br>
+    *10: 普通にツモ和了り。
+
+
+    
   </body>
 </html>
