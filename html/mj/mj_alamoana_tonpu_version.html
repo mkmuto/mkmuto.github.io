@@ -36,14 +36,16 @@
       <li>親のノーテン、誰かのトビ、子家の和了で終局(全員30000点未満でも、西入は無し)</li>
     </ul>
 
-    <h2>誤行為・チョンボ</h2>
+    <h2 id="id_chombo">誤行為・チョンボ</h2>
     <ul>
       <li>基本的には、誤行為の修正が出来る場合は、やり直してそのまま続行（例：間違った場所から自摸ったがすぐに他家が指摘、自摸り忘れて打牌したが他家がすぐに指摘、等）</li>
-      <li>修正や続行が難しい場合は、錯和(チョンボ)でノーゲームとし、その局をやり直す。流局にはならない。
+      <li>修正や続行が難しい場合は、錯和(チョンボ)でノーゲームとし、その局をやり直す(流局にはならない)。</li>
+      <li>続行可能な場合、誤行為に罰則(アガリ放棄、罰符など)を与えて局を進行。</li>
         <ul>
           <li>チョンボ者は、満貫払い（子なら2000、4000、親なら4000オール払い）。ノーテンリーチは流局時に錯和となる。</li>
-          <li>不正な和了を宣言して手牌を公開した場合、多牌の場合、チョンボとする。</li>
-          <li>少牌、空行為（空ポン、チー、カンを含む）、その他錯行為は和了放棄とする。和了放棄者は流局時にノーテン扱いとなる。</li>
+          <li>自分の切り番でないのに多牌が判明したら、チョンボとする。</li>
+          <li>不正な和了を宣言して手牌を公開した場合、チョンボとする。</li>
+          <li>少牌、空行為（空ポン、チー、カンを含む）、その他錯行為は容易に修正可能でなければ、和了放棄とする。和了放棄者は流局時にノーテン扱いとなる。</li>
         </ul>
     </ul>
 
@@ -61,9 +63,7 @@
       <li>喰い替えなし。ただし鳴いてから次の巡目以降であれば問題無し。</li>
       <li>立直後の暗槓は面子構成が不変な場合に限る。</li>
       <li>カンドラ/カン裏あり。カンドラは、暗槓は即乗り、明槓/加槓は後めくり（打牌直後、又は続く嶺上の直前）。</li>
-      <li>海底牌は槓できない。</li>
-      <li>河底牌は鳴けない。</li>
-      <li></li>
+      <li>河底牌は鳴けない。また、海底牌は槓できない。</li>
     </ul>
 
 
@@ -78,7 +78,7 @@
       <li>役満について</li>
       <ul>
         <li>数え役満:無し</li>
-        <li>国士13面や四暗刻単騎などの所謂「ダブル役満」は無し。但し役満の複合はあり。</li>
+        <li>国士13面や四暗刻単騎などの所謂「ダブル役満」は無し。但し「純粋な役満の複合(例：大三元 と 字一色 など)」はあり。</li>
         <li>ローカル役満（八連荘/人和/三連刻/一色三順/十三不塔/…）：なし</li>
         <li>役満の「包」は無し。</li>
       </ul>
@@ -268,11 +268,16 @@
 
     <h2>参照</h2>
     上記のルールは以下を参照しました。
-    <ul>
-      <li>日本プロ麻雀連盟 <a href="https://www.nihon-majan.org/ritimajyanruru.html">規定</a>と、<a href="https://www.nihon-majan.org/funokeisan.html">符計算の詳細</a></li>
+    <ul>      
+      <li>日本プロ麻雀連盟 <a href="https://www.ma-jan.or.jp/guide/game_rule.html">規定</a></li>
       <li>最高位戦日本プロ麻雀協会 <a href="https://saikouisen.com/about/rules/">ルール概要<a>と、<a href="https://saikouisen.com/pdf/230126regulations">より詳細な規定</a></li>
-      <li>日本プロ麻雀協会 <a href="https://npm2001.com/old/pdf/npm_kitei.pdf">規定</a></li>
+      <li>日本プロ麻雀協会 <a href="https://npm2001.com/old/pdf/npm_kitei.pdf">規定</a>と、<a href="https://npm2001.com/about/rule/">pdf版</a></li>
       <li>Mリーグ <a href="https://m-league.jp/about/">公式ルール</a></li>
+      <li>麻雀最強戦 <a href="https://mahjong-saikyosen.com/?page_id=365">規定</a></li>
+      <li>RMU <a href="https://rmu.jp/rule">規定</a></li>
+      <li>麻将連合 <a href="https://mu-mahjong.jp/tournament/%e7%ab%b6%e6%8a%80%e8%a6%8f%e5%ae%9a/">規定</a></li>
+      <li>主要プロ団体以外：</li>
+      <li>日本麻雀連盟<a href="https://www.nihon-majan.org/ritimajyanruru.html">規定</a>と、<a href="https://www.nihon-majan.org/funokeisan.html">符計算の詳細</a>
     </ul>
     各団体との比較を以下に纏めました。もし相違点について疑問がありましたら、その都度聞いてください。
     <table border="1" cellpadding="2" cellspacing="0" width="100%" style='font-family:"Courier New", Courier, monospace; font-size:125%'>
@@ -297,7 +302,7 @@
           <td>喰い替え</td><td class="centerspan">不可</td><td class="centerspan" colspan="5">(Mリーグの規定に無いが<br>放送では不可と言及)</td><td class="centerspan" bgcolor="yellow">可</td><td class="centerspan" bgcolor="yellow">同一牌のみ不可</td>
         </tr>
         <tr>
-          <td>ダブロン</td><td class="centerspan">なし</td><td colspan="7" class="centerspan"></td>
+          <td>ダブロン</td><td class="centerspan">頭ハネ</td><td colspan="7" class="centerspan"></td>
         </tr>
         <tr>
           <td>三家和</td><td class="centerspan">頭ハネ</td><td colspan="6" class="centerspan"></td><td class="centerspan" bgcolor="yellow">流局</td>
@@ -368,24 +373,24 @@
           <td></td><td colspan="8" class="centerspan"></td>
         </tr>
         <tr>
-          <td>チョンボの罰則</td><td class="centerspan">満貫払い</td><td class="centerspan" bgcolor="yellow">-20</td><td class="centerspan" bgcolor="yellow">12000点供託</td><td colspan="2" class="centerspan" bgcolor="yellow">-40</td><td colspan="3" class="centerspan" bgcolor="yellow">-20</td>
+          <td>チョンボの罰則</td><td class="centerspan"><a href="#id_chombo">満貫払い</a></td><td class="centerspan" bgcolor="yellow">-20</td><td class="centerspan" bgcolor="yellow">12000点供託</td><td colspan="2" class="centerspan" bgcolor="yellow">-40</td><td colspan="3" class="centerspan" bgcolor="yellow">-20</td>
         </tr>
         <tr>
-          <td>空チー・空ポン・空カンの罰則</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">取消1000点供託</td><td colspan="4" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+          <td>空チー・空ポン・空カンの罰則</td><td class="centerspan"><a href="#id_chombo">可能なら修正</a></td><td class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">取消1000点供託</td><td colspan="4" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
         </tr>
         <tr>
-          <td>誤ツモ・誤ロンの罰則</td><td class="centerspan">可能なら修正*</td><td colspan="2" class="centerspan" bgcolor="yellow">発声のみはアガリ放棄</td><td colspan="4" class="centerspan" bgcolor="yellow">発声のみはアガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+          <td>誤ツモ・誤ロンの罰則</td><td class="centerspan"><a href="#id_chombo">可能なら修正</a></td><td colspan="6" class="centerspan" bgcolor="yellow">発声のみはアガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
         </tr>
         <tr>
-          <td>喰い替えの罰則</td><td class="centerspan">可能なら修正*</td><td class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">規定無し</td><td colspan="3" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">規定無し</td><td class="centerspan" bgcolor="yellow">同一牌の場合規定無し</td>
+          <td>喰い替えの罰則</td><td class="centerspan"><a href="#id_chombo">可能なら修正</a></td><td class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">規定無し</td><td colspan="3" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">規定無し</td><td class="centerspan" bgcolor="yellow">同一牌の場合規定無し</td>
         </tr>
-          <td>ノーテンリーチの罰則</td><td class="centerspan">流局時錯和</td><td colspan="7" class="centerspan"></td>
-        </tr>
-        <tr>
-          <td>少牌、多牌の罰則</td><td class="centerspan">少牌:アガリ放棄<br>多牌:錯和</td><td colspan="6" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+          <td>ノーテンリーチの罰則</td><td class="centerspan"><a href="#id_chombo">流局時錯和</a></td><td colspan="7" class="centerspan"></td>
         </tr>
         <tr>
-          <td>見せ牌</td><td class="centerspan">可能なら修正</td><td class="centerspan" colspan="2" bgcolor="yellow">裁定</td><td colspan="2" class="centerspan" bgcolor="yellow">規定無し</td><td class="centerspan" bgcolor="yellow">裁定</td><td class="centerspan" bgcolor="yellow" colspan="2">規定無し</td>
+          <td>少牌、多牌の罰則</td><td class="centerspan"><a href="#id_chombo">少牌:アガリ放棄<br>多牌:錯和</a></td><td colspan="6" class="centerspan" bgcolor="yellow">アガリ放棄</td><td class="centerspan" bgcolor="yellow">錯和</td>
+        </tr>
+        <tr>
+          <td>見せ牌</td><td class="centerspan"><a href="#id_chombo">可能なら修正</a></td><td class="centerspan" colspan="2" bgcolor="yellow">裁定</td><td colspan="2" class="centerspan" bgcolor="yellow">規定無し</td><td class="centerspan" bgcolor="yellow">裁定</td><td class="centerspan" bgcolor="yellow" colspan="2">規定無し</td>
         </tr>
 
         <tr>
@@ -412,6 +417,8 @@
       <li>2025/03/08: 東風戦から東南戦（半荘）へ変更。</li>
       <li>2025/07/15: 得点計算の切り捨て切り上げを廃止。</li>
       <li>2025/08/20: タイトルを「東南版」に変更。チャンカンの漢字を修正。</li>
+      <li>2025/08/21: 各団体との規定比較表を追加。</li>
+      <li>2025/08/22: 各団体の規定リンクを追加、修正。錯和にページ内アンカーを追加。罰則規定の修正</li>
     </ul>
     </h2>
   </body>
