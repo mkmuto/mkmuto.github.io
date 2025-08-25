@@ -18,6 +18,21 @@
     }
     rt { font-size: 20px; }
   </style>
+  <script>
+    document.body.addEventListener('keydown',
+    event => {
+    if (event.key === 'g' && event.ctrlKey) {
+        url1 = "file:///home/ken/tmp_git/mkmuto.github.io/html/mj/mj_alamoana_tonpu_version.html";
+        url2 = "https://www.muto.org/html/mj/mj_alamoana_tonpu_version.html";
+
+      if (window.location.href == url1) {
+        window.location.href = url2;
+      } else {
+        window.location.href = url1;
+      }
+    }
+    });
+  </script>
   <body>
     <h2>はじめに</h2>
     「日本プロ麻雀連盟」「最高位戦日本プロ麻雀協会」「Mリーグ」のルールを元に、いくつか変更を加えて、作成しました。このルールでカバーできないケースが発生した場合、主催者が裁定を行い、それをその後のルールとして書き加えます。
@@ -314,7 +329,7 @@
           <td>裏ドラ</td><td class="centerspan">あり</td><td colspan="5" class="centerspan"></td><td colspan="2" bgcolor="yellow" class="centerspan">なし</td>
         </tr>
         <tr>
-          <td>槓ドラ,槓裏</td><td class="centerspan">あり</td><td colspan="5" class="centerspan">(明カン時もチャンカンされなかった時点で即乗り)</td><td colspan="2" bgcolor="yellow" class="centerspan">なし</td>
+          <td>槓ドラ,槓裏</td><td class="centerspan">あり</td><td colspan="5" class="centerspan">(加カン時もチャンカンされなかった時点で即乗り)</td><td colspan="2" bgcolor="yellow" class="centerspan">なし</td>
         </tr>
         <tr>
           <td>赤ドラ</td><td class="centerspan">あり</td><td class="centerspan"></td><td colspan="7" class="centerspan" bgcolor="yellow">なし</td>
@@ -400,11 +415,10 @@
       </tbody>
     </table>
 
-
     <h2>索引</h2>
 <dl>
   <dt><ruby>槍槓<rt>チャンカン</rt></ruby></dt>
-  <dd>他家のリーチ後1巡以内に加槓した場合、槓の発声と同時に槍槓の有無を確認し、リーチ者が槍槓すれば、リーチ・一発・槍槓となる。この場合、当然ながら加槓した者は嶺上牌をツモれない。また、この時点で槍槓が無ければ、リーチ一発の権利は消滅する（最初の加槓で槍槓が無かった場合、加槓した者は嶺上牌をツモることになるが、その直後に加槓して＝ここで言う連続する加槓の２回目＝、これがリーチ者に槍槓されたとしても、そのアガリには一発は付かない）。</dd>
+  <dd>「搶槓」とも書く。他家のリーチ後1巡以内に加槓した場合、槓の発声と同時に槍槓の有無を確認し、リーチ者が槍槓すれば、リーチ・一発・槍槓となる。この場合、当然ながら加槓した者は嶺上牌をツモれない。また、この時点で槍槓が無ければ、リーチ一発の権利は消滅する（最初の加槓で槍槓が無かった場合、加槓した者は嶺上牌をツモることになるが、その直後に加槓して＝ここで言う連続する加槓の２回目＝、これがリーチ者に槍槓されたとしても、そのアガリには一発は付かない）。</dd>
   <dt>栄和（ロンホー）</dt>
   <dd>他家の捨牌でアガリ形を完成させ、アガりを宣言して手牌を開く行為</dd>
 </dl>
@@ -421,5 +435,13 @@
       <li>2025/08/22: 各団体の規定リンクを追加、修正。錯和にページ内アンカーを追加。罰則規定の修正</li>
     </ul>
     </h2>
+
+    <h2>
+      <ul>
+        <li><a href="file:///home/ken/tmp_git/mkmuto.github.io/html/mj/mj_alamoana_tonpu_version.html">local</a></li>
+        <li><a href="https://www.muto.org/html/mj/mj_alamoana_tonpu_version.html">github</a></li>
+      </ul>
+    </h2>
+
   </body>
 </html>
